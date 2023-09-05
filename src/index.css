@@ -1,0 +1,92 @@
+body {
+  margin: 10em;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+input {
+  height: 50px;
+  font-size: 2em;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+}
+.icon {
+  fill: #000;
+  transition: fill 0.2s ease;
+  width: 1.5rem;
+}
+
+.icon:hover {
+  fill: #33f;
+}
+.copied {
+  color: #33f;
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+  text-align: center;
+  animation: fadeOut 2s forwards;
+}
+.heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.heading label {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.heading input {
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  border: 1px solid #ccc;
+  font-size: 1.2rem;
+  width: 100%;
+  max-width: 20rem;
+  box-sizing: border-box;
+}
+
+.heading input:focus {
+  outline: none;
+  border-color: #0077ff;
+  box-shadow: 0 0 0 2px #0077ff33;
+}
+
+
+.result {
+  font-family: source-code-pro,Menlo, Monaco,'Courier New';
+  font-size:20px;
+  color:blue;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+
+}
+
+button {
+  
+  border: none;
+  border-radius: 0.25rem;
+  color: #fff;
+  background: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  padding: 0.5rem 0.5rem;
+  
+ 
+}
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+    font-size: 30px;
+}
+App {
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 30px;
+}
