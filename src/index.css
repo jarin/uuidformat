@@ -5,113 +5,134 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: 1.5em; /* Increase base font size */
 }
 
-input {
-  height: 50px;
-  font-size: 2em;
+.input-container {
+  display: flex;
+  flex-direction: column;
+  margin-right: 10rem;
+  padding-left: 2rem;
+  align-items: flex-end; /* Align input boxes to the right */
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  
+}
+
+.input-group label {
+  flex: 1;
+  text-align: left; /* Align labels to the left */
+  font-size: 1.5rem; /* Increase font size */
+}
+
+.input-with-icon {
+  display: flex;
+  align-items: center;
+}
+
+.input-with-icon input {
+  height: 60px; /* Increase height */
+  font-size: 1.5em; /* Increase font size */
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-
+  padding: 0.5em; /* Add padding */
+  margin: 0.5em 0; /* Add margin */
+  border-radius: 0.25em; /* Add border radius */
+  border: 1px solid #ccc; /* Add border */
+  margin-left: 5em;
+  box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
 }
+
 .icon {
   fill: #000;
   transition: fill 0.2s ease;
-  width: 1.5rem;
+  width: 2rem; /* Increase icon size */
+  height: 2rem; /* Ensure icon height matches width */
+  margin-left: 0.5rem; /* Add margin to the left of the icon */
 }
 
 .icon:hover {
   fill: #33f;
 }
+
 .copied {
   color: #33f;
-  font-size: 0.8rem;
+  font-size: 1em; /* Increase font size */
   margin-top: 0.5rem;
   text-align: center;
   animation: fadeOut 2s forwards;
 }
-.heading {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 1rem;
-}
-
-.heading label {
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
-}
-
-.heading input {
-  padding: 0.5rem;
-  border-radius: 0.25rem;
-  border: 1px solid #ccc;
-  font-size: 1.2rem;
-  width: 100%;
-  max-width: 20rem;
-  box-sizing: border-box;
-}
-
-.heading input:focus {
-  outline: none;
-  border-color: #0077ff;
-  box-shadow: 0 0 0 2px #0077ff33;
-}
-
 
 .result {
-  font-family: source-code-pro,Menlo, Monaco,'Courier New';
-  font-size:18px;
- 
+  font-family: source-code-pro, Menlo, Monaco, 'Courier New';
+  font-size: 1.5rem; /* Increase font size */
   align-items: center;
   display: flex;
   flex-direction: column;
+}
 
-}
 .invalid {
-  color:rgb(51, 66, 23);
+  color: rgb(51, 66, 23);
 }
- .valid {
-  color:rgb(41, 44, 185);
+
+.valid {
+  color: rgb(41, 44, 185);
 }
+
 button {
-  
   border: none;
   border-radius: 0.25rem;
   color: #fff;
-  background: none;
+  background-color: #ffffff; /* Add background color */
   cursor: pointer;
-  font-size: 1.2rem;
+  font-size: 1.5rem; /* Increase font size */
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  padding: 0.5rem 0.5rem;
-  
- 
+  padding: 0.5rem 1rem; /* Add padding */
+  margin: 0.5rem; /* Add margin */
 }
+
+button:hover {
+  background-color: #e0e0e0; /* Add hover effect */
+}
+
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-    font-size: 30px;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+  font-size: 1.5rem; /* Increase font size */
 }
-App {
-  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  font-size: 30px;
+
+.App {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 1.5rem; /* Increase font size */
 }
 
 .infobox {
-
   border: 1px solid #ccc;
   border-radius: 0.25rem;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  background: #fff;
-  box-shadow: 0 0 0 1px #ccc;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-
+  padding: 2em;
 }
-.infobox h1 {
-  font-size: 1.0rem;
-  margin-bottom: 0.5rem;
+.floating-box {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #28a745; /* Changed to a green color for success */
+  color: white;
+  padding: 15px 30px; /* Increased padding for better visibility */
+  border-radius: 8px; /* Increased border radius for smoother corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Added a subtle shadow */
+  font-size: 1.2rem; /* Increased font size */
+  z-index: 1000; /* Ensure it appears above other elements */
+  animation: fadeOut 2s forwards;
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    display: none;
+  }
 }

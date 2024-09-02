@@ -37,11 +37,7 @@ const classResult = `result ${isValidUUID(props.uuid) ? 'valid' : 'invalid'}`;
  
  <div className={classResult}>
       {props.uuid}
-      <button onClick={handleCopyClick}>
-       <MyIcon className="icon" />
-        
-      </button>
-      {copySuccess && <span className="copied">Copied!</span>}
+       
     </div>
   );
 }

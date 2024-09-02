@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { HexToUuidInput, hexToUuid, uuidToHex } from './HexToUuidInput';
-import { HexToUuidConverter } from './HexToUuidInput';
-import { v4 as uuidv4 } from 'uuid'; // Make sure to install uuid package
+import { HexToUuidInput } from './HexToUuidInput';
+import { HexToUuidConverter } from './HexToUuidConverter';
+import { v4 as uuidv4 } from 'uuid';
+import { hexToUuid, uuidToHex } from './utils';
 
 function App() {
   const [hex, setHex] = useState('');
   const [uuid, setUuid] = useState('');
-
+  const [copySuccess, setCopySuccess] = useState(false);
   function handleHexChange(newHex: string) {
     setHex(newHex);
     setUuid(hexToUuid(newHex.substring(0, 32)));
@@ -22,13 +23,48 @@ function App() {
     setUuid(newUuid);
     setHex(uuidToHex(newUuid));
   }
+  function handleCopyHex() {
+    navigator.clipboard.writeText(hex)
+      .then(() => {
+        setCopySuccess(true);
+        setTimeout(() => {
+          setCopySuccess(false);
+        }, 2000);
+      })
+      .catch(() => {
+        setCopySuccess(false);
+      });
+  }
+  
+  function handleCopyUuid() {
+    navigator.clipboard.writeText(uuid)
+      .then(() => {
+        setCopySuccess(true);
+        setTimeout(() => {
+          setCopySuccess(false);
+        }, 2000);
+      })
+      .catch(() => {
+        setCopySuccess(false);
+      });
+  }
+  
+  
+  
 
   return (
-    <div className="App">
+    <div className="App">    {copySuccess && <div className="floating-box">Copied!</div>}
       <header className="App-header">
-      <HexToUuidInput hex={hex} uuid={uuid} onHexChange={handleHexChange} onUuidChange={handleUuidChange} />  
-      <HexToUuidConverter hex={hex} uuid={uuid} onGenerateUuid={generateRandomUuid} />
-        
+        <HexToUuidInput 
+          hex={hex} 
+          uuid={uuid} 
+          onHexChange={handleHexChange} 
+          onUuidChange={handleUuidChange} 
+          onCopyHex={handleCopyHex}
+          onCopyUuid={handleCopyUuid}
+        />
+         
+        <HexToUuidConverter hex={hex} uuid={uuid} onGenerateUuid={generateRandomUuid} />
       </header>
       <div className="infobox">
         <h1>What's this?</h1>
