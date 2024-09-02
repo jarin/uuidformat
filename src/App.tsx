@@ -68,8 +68,9 @@ function App() {
       </header>
       <div className="infobox">
         <h1>What's this?</h1>
-        <p>Copy a UUID from the database (typically RAW(16) from Oracle) and paste it here to get the UUID in the proper format. A UUID conforming to RFC-4122 will be slightly blue. This site is not collecting any data. Nothing leaves your browser.</p>
+        <p>Copy a UUID from the database (typically RAW(16) from Oracle) and paste it here to get the UUID in the proper format. A UUID conforming to RFC-4122 will be slightly blue. This site is not collecting any user input. Nothing leaves your browser.</p>
       </div>
+      <p><a href="https://github.com/jarin/uuidformat">Github repo</a> </p>
     </div>
   );
 }
