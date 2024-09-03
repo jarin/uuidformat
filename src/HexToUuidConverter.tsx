@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import HexToUuidDisplay from './HexToUuidDisplay';
 import { isValidUUID } from './utils';
 
@@ -9,27 +9,16 @@ interface HexToUuidConverterProps {
 }
 
 export function HexToUuidConverter(props: HexToUuidConverterProps) {
-  const [copySuccess, setCopySuccess] = useState(false);
+ 
 
-  function handleCopyClick(text: string) {
-    navigator.clipboard.writeText(text)
-      .then(() => {
-        setCopySuccess(true);
-        setTimeout(() => {
-          setCopySuccess(false);
-        }, 2000);
-      })
-      .catch(() => {
-        setCopySuccess(false);
-      });
-  }
+ 
 
   const classResult = `result ${isValidUUID(props.uuid) ? 'valid' : 'invalid'}`;
 
   return (
     <div className={classResult}>
       <HexToUuidDisplay uuid={props.uuid} />
-      {copySuccess && <div className="floating-box">Copied!</div>}
+     
 
       <button 
         onClick={props.onGenerateUuid} 

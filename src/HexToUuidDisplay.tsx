@@ -17,20 +17,9 @@ function isValidUUID(uuid: string) {
     }
 }
 export function HexToUuidDisplay(props: HexToUuidDisplayProps) {
-    const [copySuccess, setCopySuccess] = useState(false);
 
-    function handleCopyClick() {
-      navigator.clipboard.writeText(props.uuid)
-      .then(() => {
-        setCopySuccess(true);
-        setTimeout(() => {
-          setCopySuccess(false);
-        }, 2000);
-      })
-      .catch(() => {
-        setCopySuccess(false);
-      })};
- 
+
+
 const classResult = `result ${isValidUUID(props.uuid) ? 'valid' : 'invalid'}`;
 
     return (
