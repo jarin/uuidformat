@@ -34,11 +34,13 @@ body {
 .uuid-column {
   position: absolute;
   top: -100vh;
-  font-size: 10px;
-  line-height: 12px;
-  white-space: nowrap;
+  font-size: 12px;
+  line-height: 14px;
+  white-space: pre;
   animation: fall linear infinite;
   opacity: 0.8;
+  width: 200px;
+  overflow: hidden;
 }
 
 @keyframes fall {
@@ -183,22 +185,10 @@ body {
     
     <div class="error-container">
       <div class="error-404" id="error-code">404</div>
-      
-      <div class="error-message">
-        > SYSTEM ERROR: UUID_NOT_FOUND
-      </div>
-      
-      <div class="error-message">
-        > SCANNING HEXADECIMAL SPACE...
-      </div>
-      
-      <div class="uuid-static" id="static-uuid">
+            <div class="uuid-static" id="static-uuid">
         ERROR_UUID: 0000-404-0000-404-000000000404
       </div>
       
-      <div class="error-message">
-        > PAGE CORRUPTED IN TRANSITION
-      </div>
       
       <a href="/" class="home-link">
         > RETURN TO MAIN SYSTEM
@@ -212,29 +202,28 @@ body {
     <script>
       // Generate UUID segments for Matrix effect
       function generateUUIDSegment() {
-        const chars = '0123456789abcdef-';
+        const chars = '0123456789abcdef';
         const segments = [
-          // Full UUIDs
+          // Full UUIDs (shortened for columns)
           () => {
             let uuid = '';
-            for (let i = 0; i < 36; i++) {
-              if ([8, 13, 18, 23].includes(i)) {
-                uuid += '-';
-              } else {
-                uuid += chars[Math.floor(Math.random() * 16)];
-              }
+            for (let i = 0; i < 8; i++) {
+              uuid += chars[Math.floor(Math.random() * 16)];
             }
-            return uuid;
+            return uuid + '-' + chars[Math.floor(Math.random() * 16)].repeat(4);
           },
           // UUID parts
           () => chars[Math.floor(Math.random() * 16)].repeat(4),
-          () => chars[Math.floor(Math.random() * 16)].repeat(8),
+          () => chars[Math.floor(Math.random() * 16)].repeat(6),
           // Special 404 segments
           () => '0404',
-          () => '404-',
-          () => '-404',
+          () => '404',
           () => '0000',
           () => 'ffff',
+          () => 'dead',
+          () => 'beef',
+          // Mix of hex chars
+          () => chars[Math.floor(Math.random() * 16)] + chars[Math.floor(Math.random() * 16)] + chars[Math.floor(Math.random() * 16)] + chars[Math.floor(Math.random() * 16)],
         ];
         
         return segments[Math.floor(Math.random() * segments.length)]();
@@ -244,14 +233,14 @@ body {
       function createMatrixColumn() {
         const column = document.createElement('div');
         column.className = 'uuid-column';
-        column.style.left = Math.random() * 100 + '%';
-        column.style.animationDuration = (Math.random() * 3 + 2) + 's';
-        column.style.fontSize = (Math.random() * 6 + 8) + 'px';
-        column.style.opacity = Math.random() * 0.8 + 0.2;
+        column.style.left = Math.random() * 95 + '%';
+        column.style.animationDuration = (Math.random() * 4 + 3) + 's';
+        column.style.fontSize = (Math.random() * 4 + 10) + 'px';
+        column.style.opacity = Math.random() * 0.6 + 0.3;
         
-        // Generate column content
+        // Generate column content - more lines, shorter segments
         let content = '';
-        for (let i = 0; i < 50; i++) {
+        for (let i = 0; i < 80; i++) {
           content += generateUUIDSegment() + '\n';
         }
         column.textContent = content;
@@ -259,19 +248,26 @@ body {
         // Random green shades
         const greenShades = ['#00ff00', '#00cc00', '#00aa00', '#008800', '#00ff41', '#00ff88'];
         column.style.color = greenShades[Math.floor(Math.random() * greenShades.length)];
+        column.style.textShadow = `0 0 5px ${column.style.color}`;
         
         document.getElementById('matrix').appendChild(column);
         
         // Remove column after animation
+        const duration = parseFloat(column.style.animationDuration) * 1000;
         setTimeout(() => {
           if (column.parentNode) {
             column.parentNode.removeChild(column);
           }
-        }, 5000);
+        }, duration + 1000);
       }
 
       // Create matrix effect
-      setInterval(createMatrixColumn, 150);
+      setInterval(createMatrixColumn, 100);
+      
+      // Start with some immediate columns
+      for (let i = 0; i < 15; i++) {
+        setTimeout(createMatrixColumn, i * 50);
+      }
 
       // Make the 404 built from UUID segments
       function updateErrorCode() {
