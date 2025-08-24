@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="404 - Page not found" />
+    <title>404 - UUID Not Found</title>
+    <style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #000;
+  color: #00ff00;
+  font-family: 'Courier New', monospace;
+  overflow: hidden;
+  height: 100vh;
+  cursor: none;
+}
+
+.matrix-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.uuid-column {
+  position: absolute;
+  top: -100vh;
+  font-size: 10px;
+  line-height: 12px;
+  white-space: nowrap;
+  animation: fall linear infinite;
+  opacity: 0.8;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(-100vh);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+}
+
+.error-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.9);
+  border: 2px solid #00ff00;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 0 50px #00ff00;
+  backdrop-filter: blur(5px);
+}
+
+.error-404 {
+  font-size: 120px;
+  font-weight: bold;
+  color: #00ff00;
+  text-shadow: 0 0 20px #00ff00;
+  margin-bottom: 20px;
+  animation: pulse 2s infinite;
+  letter-spacing: 10px;
+}
+
+@keyframes pulse {
+  0%, 100% { 
+    opacity: 1; 
+    text-shadow: 0 0 20px #00ff00;
+  }
+  50% { 
+    opacity: 0.7; 
+    text-shadow: 0 0 40px #00ff00, 0 0 60px #00ff00;
+  }
+}
+
+.error-message {
+  font-size: 18px;
+  margin: 20px 0;
+  color: #00cc00;
+  text-shadow: 0 0 10px #00ff00;
+}
+
+.uuid-static {
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  color: #00aa00;
+  margin: 20px 0;
+  opacity: 0.8;
+  word-break: break-all;
+}
+
+.home-link {
+  display: inline-block;
+  color: #00ff00;
+  text-decoration: none;
+  border: 2px solid #00ff00;
+  padding: 15px 30px;
+  margin-top: 30px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  background: rgba(0, 255, 0, 0.1);
+  text-shadow: 0 0 10px #00ff00;
+}
+
+.home-link:hover {
+  background: rgba(0, 255, 0, 0.2);
+  box-shadow: 0 0 30px #00ff00;
+  transform: scale(1.05);
+}
+
+.glitch {
+  animation: glitch 0.3s infinite;
+}
+
+@keyframes glitch {
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); filter: hue-rotate(90deg); }
+  40% { transform: translate(-2px, -2px); filter: hue-rotate(180deg); }
+  60% { transform: translate(2px, 2px); filter: hue-rotate(270deg); }
+  80% { transform: translate(2px, -2px); filter: hue-rotate(360deg); }
+  100% { transform: translate(0); }
+}
+
+.terminal-text {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  font-size: 12px;
+  color: #00aa00;
+  opacity: 0.7;
+  z-index: 101;
+}
+
+.cursor {
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+@media (max-width: 768px) {
+  .error-404 {
+    font-size: 80px;
+    letter-spacing: 5px;
+  }
+  
+  .error-container {
+    padding: 20px;
+    margin: 20px;
+    width: calc(100% - 40px);
+  }
+  
+  .error-message {
+    font-size: 14px;
+  }
+  
+  .uuid-column {
+    font-size: 8px;
+    line-height: 10px;
+  }
+}
+    </style>
+  </head>
+  <body>
+    <div class="matrix-bg" id="matrix"></div>
+    
+    <div class="error-container">
+      <div class="error-404" id="error-code">404</div>
+      
+      <div class="error-message">
+        > SYSTEM ERROR: UUID_NOT_FOUND
+      </div>
+      
+      <div class="error-message">
+        > SCANNING HEXADECIMAL SPACE...
+      </div>
+      
+      <div class="uuid-static" id="static-uuid">
+        ERROR_UUID: 0000-404-0000-404-000000000404
+      </div>
+      
+      <div class="error-message">
+        > PAGE CORRUPTED IN TRANSITION
+      </div>
+      
+      <a href="/" class="home-link">
+        > RETURN TO MAIN SYSTEM
+      </a>
+    </div>
+
+    <div class="terminal-text">
+      system@uuid-matrix:~$ cat /dev/null > /404/page_not_found<span class="cursor">█</span>
+    </div>
+
+    <script>
+      // Generate UUID segments for Matrix effect
+      function generateUUIDSegment() {
+        const chars = '0123456789abcdef-';
+        const segments = [
+          // Full UUIDs
+          () => {
+            let uuid = '';
+            for (let i = 0; i < 36; i++) {
+              if ([8, 13, 18, 23].includes(i)) {
+                uuid += '-';
+              } else {
+                uuid += chars[Math.floor(Math.random() * 16)];
+              }
+            }
+            return uuid;
+          },
+          // UUID parts
+          () => chars[Math.floor(Math.random() * 16)].repeat(4),
+          () => chars[Math.floor(Math.random() * 16)].repeat(8),
+          // Special 404 segments
+          () => '0404',
+          () => '404-',
+          () => '-404',
+          () => '0000',
+          () => 'ffff',
+        ];
+        
+        return segments[Math.floor(Math.random() * segments.length)]();
+      }
+
+      // Create Matrix columns
+      function createMatrixColumn() {
+        const column = document.createElement('div');
+        column.className = 'uuid-column';
+        column.style.left = Math.random() * 100 + '%';
+        column.style.animationDuration = (Math.random() * 3 + 2) + 's';
+        column.style.fontSize = (Math.random() * 6 + 8) + 'px';
+        column.style.opacity = Math.random() * 0.8 + 0.2;
+        
+        // Generate column content
+        let content = '';
+        for (let i = 0; i < 50; i++) {
+          content += generateUUIDSegment() + '\n';
+        }
+        column.textContent = content;
+        
+        // Random green shades
+        const greenShades = ['#00ff00', '#00cc00', '#00aa00', '#008800', '#00ff41', '#00ff88'];
+        column.style.color = greenShades[Math.floor(Math.random() * greenShades.length)];
+        
+        document.getElementById('matrix').appendChild(column);
+        
+        // Remove column after animation
+        setTimeout(() => {
+          if (column.parentNode) {
+            column.parentNode.removeChild(column);
+          }
+        }, 5000);
+      }
+
+      // Create matrix effect
+      setInterval(createMatrixColumn, 150);
+
+      // Make the 404 built from UUID segments
+      function updateErrorCode() {
+        const errorCode = document.getElementById('error-code');
+        const segments = ['4000', '0040', '0004', '404', '040', '400'];
+        
+        setInterval(() => {
+          if (Math.random() < 0.1) { // 10% chance to glitch
+            const originalText = errorCode.textContent;
+            errorCode.textContent = segments[Math.floor(Math.random() * segments.length)];
+            errorCode.classList.add('glitch');
+            
+            setTimeout(() => {
+              errorCode.textContent = originalText;
+              errorCode.classList.remove('glitch');
+            }, 200);
+          }
+        }, 500);
+      }
+
+      // Update static UUID with 404 elements
+      function updateStaticUUID() {
+        const staticUuid = document.getElementById('static-uuid');
+        const uuidTemplates = [
+          '0000-0404-0000-0404-000000000404',
+          '404f-ound-4044-8404-404040404040',
+          'ffff-404-0000-404-ffffffffffff',
+          '0404-0404-0404-0404-040404040404',
+          'dead-beef-404-404-pagenotfound0',
+        ];
+        
+        setInterval(() => {
+          if (Math.random() < 0.15) { // 15% chance to change
+            staticUuid.textContent = 'ERROR_UUID: ' + uuidTemplates[Math.floor(Math.random() * uuidTemplates.length)];
+          }
+        }, 2000);
+      }
+
+      // Random glitch effects
+      function addGlitchEffects() {
+        const container = document.querySelector('.error-container');
+        
+        setInterval(() => {
+          if (Math.random() < 0.05) { // 5% chance
+            container.classList.add('glitch');
+            setTimeout(() => {
+              container.classList.remove('glitch');
+            }, 100);
+          }
+        }, 1000);
+      }
+
+      // Occasionally make some falling UUIDs red (errors)
+      function createErrorColumn() {
+        if (Math.random() < 0.1) { // 10% chance for red error column
+          const column = document.createElement('div');
+          column.className = 'uuid-column';
+          column.style.left = Math.random() * 100 + '%';
+          column.style.animationDuration = (Math.random() * 2 + 1) + 's';
+          column.style.fontSize = (Math.random() * 4 + 10) + 'px';
+          column.style.color = '#ff0000';
+          column.style.textShadow = '0 0 10px #ff0000';
+          
+          let content = '';
+          for (let i = 0; i < 20; i++) {
+            content += 'ERROR-404-ERROR-404-ERROR\n';
+          }
+          column.textContent = content;
+          
+          document.getElementById('matrix').appendChild(column);
+          
+          setTimeout(() => {
+            if (column.parentNode) {
+              column.parentNode.removeChild(column);
+            }
+          }, 3000);
+        }
+      }
+
+      // Add error columns occasionally
+      setInterval(createErrorColumn, 2000);
+
+      // Initialize effects
+      updateErrorCode();
+      updateStaticUUID();
+      addGlitchEffects();
+
+      // Easter egg: click anywhere to intensify the effect
+      document.addEventListener('click', () => {
+        for (let i = 0; i < 10; i++) {
+          setTimeout(createMatrixColumn, i * 50);
+        }
+      });
+
+      // Konami code easter egg (up up down down left right left right B A)
+      let konamiCode = [];
+      const konami = [38,38,40,40,37,39,37,39,66,65];
+      
+      document.addEventListener('keydown', (e) => {
+        konamiCode.push(e.keyCode);
+        if (konamiCode.length > konami.length) {
+          konamiCode.shift();
+        }
+        
+        if (konamiCode.join(',') === konami.join(',')) {
+          // Matrix overload!
+          for (let i = 0; i < 50; i++) {
+            setTimeout(createMatrixColumn, i * 20);
+          }
+          konamiCode = [];
+        }
+      });
+    </script>
+  </body>
+</html>
